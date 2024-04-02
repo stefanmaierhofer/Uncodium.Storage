@@ -1,0 +1,14 @@
+source https://api.nuget.org/v3/index.json
+
+storage: none
+framework: auto-detect
+
+nuget Aardvark.Build                            ~> 1.0.22
+
+nuget System.Text.Json                          >= 6.0.0
+
+nuget AUnit                                     ~> 1.0.9
+nuget AUnit.Runtime                             ~> 1.0.9
+
+nuget Azure.Core                                >= 1.33
+nuget Azure.Storage.Blobs                       >= 12.15

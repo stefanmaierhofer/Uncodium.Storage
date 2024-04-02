@@ -1,0 +1,10 @@
+.vs
+**/bin
+**/obj
+.ionide
+.paket
+paket-files
+publish
+tmp
+*.csproj.user
+/testlog_*.json

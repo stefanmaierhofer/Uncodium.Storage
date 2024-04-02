@@ -1,0 +1,9 @@
+type project
+id Uncodium.Storage.Azure
+authors Stefan Maierhofer
+owners Stefan Maierhofer
+projectUrl https://github.com/stefanmaierhofer/Uncodium.Storage
+licenseUrl https://github.com/stefanmaierhofer/Uncodium.Storage/blob/master/LICENSE
+description
+    Uncodium storage abstractions.
+include-pdbs true
