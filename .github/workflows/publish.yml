@@ -1,0 +1,40 @@
+name: Publish
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - RELEASE_NOTES.md
+      - .github/workflows/publish.yml
+jobs:
+  pack:
+    name: Package
+    runs-on: self-hosted
+    steps:  
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install Dotnet
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.203'
+      - name: Restore Tools
+        run: dotnet tool restore
+      - name: Restore
+        run: dotnet paket restore
+      - name: Build
+        shell: sh
+        run: dotnet build -c Release src/Uncodium.Storage.sln
+      - name: Pack
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: dotnet aardpack --notag src/Uncodium.Storage.sln
+      # - name: GitHub Packages
+      #   env:
+      #     NUGET_KEY: ${{ secrets.GITHUB_TOKEN }}
+      #   shell: sh
+      #   run: dotnet nuget push "bin/pack/*.nupkg" -k $NUGET_KEY -s "https://nuget.pkg.github.com/aardworx/index.json" --skip-duplicate
+      - name: NuGet
+        env:
+          NUGET_KEY: ${{ secrets.NUGET_KEY }}
+        shell: sh
+        run: dotnet nuget push "bin/pack/*.nupkg" -k $NUGET_KEY -s "https://api.nuget.org/v3/index.json" --skip-duplicate
